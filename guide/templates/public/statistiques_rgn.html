@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../public/_head.html' %}
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+	<!-- Top Header_Area -->
+    {% include '../public/top_header_area.html' %}
+	<!-- End Top Header_Area -->
+
+	<!-- Header_Area -->
+    {% include '../public/main_navbar.html' %}
+	<!-- End Header_Area -->
+
+    <!-- Banner area -->
+    <section class="banner_area" data-stellar-background-ratio="0.5">
+        <h2>STATISTIQUES</h2>
+        <ol class="breadcrumb">
+            <li><a href="index.html">REGION</a></li>
+            <li><a href="#" class="active">{{region.name_rgn}}</a></li>
+        </ol>
+    </section>
+    <!-- End Banner area -->
+
+    <!-- About Us Area -->
+    <section class="about_us_area about_us_2 row">
+        <div class="container">
+            <div class="row about_row about_us2_pages">
+                <div class="who_we_area col-md-5">
+                    <div class="subtittle">
+                        <h2>{{region.name_rgn}}</h2>
+                    </div>
+                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                    <a href="#" class="button_all">Map des établissements de la région</a><hr>
+                    <img style="height:260px; width:360px" src="{% static region.img_region %}">
+                </div>
+                <div class="col-md-7 our_skill_inner">
+                    <div class="panel panel-dark">
+                          <!-- Default panel contents -->
+                          <div class="panel-heading"><h2> Pourcentage par arrondissement</h2></div>
+                              <div class="panel-body">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Code arr.</th>
+                                      <th scope="col">Arrond.</th>
+                                      <th scope="col">dernières Stat.</th>
+                                      <th scope="col">Actuelles Stat.</th>
+                                      <th scope="col">Sur carte</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                            {% for department in departments %}
+                                {% for arrondissement in arrondissements %}
+                                    {% if arrondissement.department.id == department.id %}
+                                    <tr>
+                                          <th scope="row">{{arrondissement.code_arr}}</th>
+                                          <td>{{arrondissement.name_arr}}</td>
+                                          <td>
+                                              Réussite: <label style="color:green"> F:  % | G:  %</label><hr>
+                                              Echec: <label style="color:red"> F:  % | G:  %</label>
+                                          </td><td>
+                                              Réussite: <label style="color:green"> F:  % | G:  %</label><hr>
+                                              Echec: <label style="color:red"> F:  % | G:  %</label>
+                                          </td>
+
+                                        <td style="width: 50px">
+                                            <a href="" class="btn btn-success">
+                                                <span class="glyphicon glyphicon-map-marker" aria-hidden=true style="height:50px; width:50px"></span>
+                                                <br>Mapper
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                                  </tbody>
+                                </table>
+                              </div>
+
+                          <!-- Table -->
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+              <!-- Default panel contents -->
+              <div class="panel-heading"><h3> Pourcentage par établissements de toute la région : {{region}}</h3></div>
+              <div class="panel-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Code</th>
+                      <th scope="col">Etab.</th>
+                      <th scope="col">Système</th>
+                      <th scope="col">Ordre</th>
+                      <th scope="col">Ann. sur-passée</th>
+                      <th scope="col">Ann. passée</th>
+                      <th scope="col">Cette année</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for department in departments %}
+                    {% for arrondissement in arrondissements %}
+                        {% if arrondissement.department.id == department.id %}
+                        {% for school in schools %}
+                            {% if school.arrondissement.id == arrondissement.id %}
+                            <tr>
+                              <th scope="row" style="width:50px">{{school.code_sch}}</th>
+                                <td style="width:250px"><label>{{school.name_sch}}</label><br>
+                              Régime: {{school.regime_sch}}</td>
+                              <td style="width:80px">{{school.system_sch}}</td>
+                              <td style="width:80px">{{school.order}}</td>
+                              <td>
+                                  Réussite: <label style="color:green"> F:  % | G:  %</label><hr>
+                                  Echec: <label style="color:red"> F:  % | G:  %</label>
+                              </td><td>
+                                  Réussite: <label style="color:green"> F:  % | G:  %</label><hr>
+                                  Echec: <label style="color:red"> F:  % | G:  %</label>
+                              </td><td>
+                                  Réussite: <label style="color:green"> F:  % | G:  %</label><hr>
+                                  Echec: <label style="color:red"> F:  % | G:  %</label>
+                              </td>
+                                <td style="width: 50px">
+                                    <a href="{% url 'publicMapSchool' school.id%}" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-map-marker" aria-hidden=true style="height:50px; width:50px"></span>
+                                        <br>Mapper
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Table -->
+
+            </div>
+        </div>
+    </section>
+    <!-- End About Us Area -->
+
+    <!-- End Our Partners Area -->
+
+    <!-- Footer Area -->
+{% include '../public/_footer.html' %}
+    <!-- End Footer Area -->
+
+    {% include '../public/javascript.html' %}
+</body>
+</html>

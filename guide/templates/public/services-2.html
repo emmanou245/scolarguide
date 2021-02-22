@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../public/_head.html' %}
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+	<!-- Top Header_Area -->
+    {% include '../public/top_header_area.html' %}
+	<!-- End Top Header_Area -->
+
+	<!-- Header_Area -->
+    {% include '../public/main_navbar.html' %}
+	<!-- End Header_Area -->
+
+<!-- Banner area -->
+    <section class="banner_area" data-stellar-background-ratio="0.5">
+        <h2>Détails scolaires sur la région</h2>
+        <ol class="breadcrumb">
+            <li><a href="index.html">Détails</a></li>
+            <li><a href="#" class="active">{{region.name_rgn}}</a></li>
+        </ol>
+    </section>
+    <!-- End Banner area -->
+
+    <!-- Building Construction Area -->
+    <section class="building_construction_area">
+        <div class="container">
+            <div class="row building_construction_row">
+                <div class="col-sm-8 constructing_laft">
+                    <h2>{{region.name_rgn}}</h2>
+                    <img src="{% static ''%}{{region.img_region}}" alt="">
+                    <a href="#">Description </a>
+                    <p>{{region.desc_rgn}}</p>
+                    <hr>
+                    <h5>Dernière modification : {{region.last_modify}}</h5>
+                    <hr>
+                    <div class="col-md-6 ipsum">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commo-do consequat.</p>
+                        <ul class="excavator">
+                            <li><i class="fa fa-chevron-circle-right"></i>Hydraulic Excavator</li>
+                            <li><i class="fa fa-chevron-circle-right"></i>Piling Equipment</li>
+                            <li><i class="fa fa-chevron-circle-right"></i>Port Machinery</li>
+                            <li><i class="fa fa-chevron-circle-right"></i>Concrete Pump</li>
+                            <li><i class="fa fa-chevron-circle-right"></i>Excavators &amp; more</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 ipsum_img"><img src="images/construction-2.jpg" alt=""></div>
+                    <div class="col-md-12 p0">
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+                    </div>
+                </div>
+                <div class="col-sm-4 constructing_right">
+                    <h2>Départements</h2>
+                    <ul class="painting">
+                        {% for department in departments %}
+                            {% if department.region.id == region.id %}
+
+                        <li><a href="{% url 'statRgn' region.id%}">
+                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            {{department.name_dep}}</a>
+                        </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <div class="contact_us">
+                        <h4>Contact Us</h4>
+                        <a href="#" class="contac_namber">+88 0168 3661882</a>
+                        <a href="#" class="contac_namber">+88 0181 2013370</a>
+                        <p>Lorem Ipsum is simply dummy text of the print-ing and typesetting industry. If you use this site regularly and would like to help keep</p>
+                        <a href="#" class="button_all">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Building Construction Area -->
+
+
+    <!-- End Our Partners Area -->
+
+    <!-- Footer Area -->
+{% include '../public/_footer.html' %}
+    <!-- End Footer Area -->
+
+    {% include '../public/javascript.html' %}
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../public/_head.html' %}
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+	<!-- Top Header_Area -->
+    {% include '../public/top_header_area.html' %}
+	<!-- End Top Header_Area -->
+
+	<!-- Header_Area -->
+    {% include '../public/main_navbar.html' %}
+	<!-- End Header_Area -->
+
+    <!-- Banner area -->
+    <section class="banner_area" data-stellar-background-ratio="0.5">
+        <h2>RECHERCHE SUR LES ETABLISSEMENTS</h2>
+        <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#" class="active">{{title}}</a></li>
+        </ol>
+    </section>
+    <!-- End Banner area -->
+
+    <!-- blog area -->
+    <section class="blog_all">
+        <div class="container">
+            <div class="row m0 blog_row">
+                <div class="col-sm-8 main_blog">
+                    <div class="col-xs-1 p0">
+                       <div class="blog_date">
+                           <a href="#">Guide</a>
+                            <a href="#">****</a>
+                       </div>
+                    </div>
+                    <div class="col-xs-11 blog_content">
+                        <a class="blog_heading" href="#">{{title}}</a>
+                    </div>
+
+                    <div class="col-md-12">
+
+                      <div class="row placeholders">
+                        <div class="col-xs-6 col-sm-3 placeholder">
+                          <img style="margin:2%" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                          <h4>Infrastrures</h4>
+                        </div>
+                        <div class="col-xs-6 col-sm-3 placeholder">
+                          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                          <h4>Etablissements</h4>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 widget_area">
+                    <div class="resent">
+                        <h3>RECHERCHES SIMILAIRES</h3>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="images/blog/rs-1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <a href="">Get informed about construction industry trends &amp; development.</a>
+                                <h6>Oct 19, 2016</h6>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="images/blog/rs-2.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <a href="">Get informed about construction industry trends &amp; development.</a>
+                                <h6>Oct 19, 2016</h6>
+                            </div>
+                        </div>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="images/blog/rs-3.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <a href="">Get informed about construction industry trends &amp; development.</a>
+                                <h6>Oct 19, 2016</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div><hr>
+                        {% if result_object.count != 0 %}
+                <h2 class="sub-header">Etablissements trouvés : </h2><br>
+                      <div class="table-responsive">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">Code</th>
+                              <th scope="col">Etab.</th>
+                              <th scope="col">Système</th>
+                              <th scope="col">Ordre</th>
+                              <th scope="col">Ann. sur-passée</th>
+                              <th scope="col">Ann. passée</th>
+                              <th scope="col">Cette année</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                                {% for school in result_object %}
+                            <tr>
+                              <th scope="row" style="width:50px">{{school.code_sch}}</th>
+                                <td style="width:250px"><label>{{school.name_sch}}</label><br>
+                              Régime: {{school.regime_sch}}</td>
+                              <td style="width:80px">{{school.system_sch}}</td>
+                              <td style="width:80px">{{school.order}}</td>
+                              <td>
+                                  Réussite: <label style="color:green"> F:  % | G:  %</label><hr>
+                                  Echec: <label style="color:red"> F:  % | G:  %</label>
+                              </td><td>
+                                  Réussite: <label style="color:green"> F:  % | G:  %</label><hr>
+                                  Echec: <label style="color:red"> F:  % | G:  %</label>
+                              </td><td>
+                                  Réussite: <label style="color:green"> F:  % | G:  %</label><hr>
+                                  Echec: <label style="color:red"> F:  % | G:  %</label>
+                              </td>
+                                <td style="width: 50px">
+                                    <a href="{% url 'publicMapSchool' school.id%}" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-map-marker" aria-hidden=true style="height:50px; width:50px"></span>
+                                        <br>Mapper
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                          {% else %}
+                          <h1 style="color:red">Aucun résultat trouvé à cette recherche parmi les écoles</h1>
+
+                          {% endif %}
+                      </div>
+            </div>
+        </div>
+    </section>
+    <!-- End blog area -->
+
+    <!-- End Footer Area -->
+<!-- Footer Area -->
+{% include '../public/_footer.html' %}
+    <!-- End Footer Area -->
+
+    {% include '../public/javascript.html' %}
+
+</body>
+</html>

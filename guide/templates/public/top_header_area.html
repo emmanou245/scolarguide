@@ -1,0 +1,30 @@
+{% load static %}
+
+	<section class="top_header_area" style="background-color: green;">
+	    <div class="container">
+            <ul class="nav navbar-nav top_nav">
+                <li><a href="#"><i class="fa fa-phone"></i>+237 698 204 289 | +237 655 495 733 </a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i>genie_log_groupe6@gmail.com</a></li>
+                <li><a href="#"><i class="fa fa-map-o"></i>NGAOUNDERE [CAMEROUN]</a></li>
+            </ul>
+            <ul style="float: right" class="nav top_nav">
+				{% if user.is_authenticated %}
+				<li style="float: right; background-color:red;">
+					<form method="POST" action="{% url 'logoutGuide' %}"> {% csrf_token %}
+						<button type="submit"  class="button_all" name="deconnexion">
+							{{user}}
+							<i style="color:red" class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
+						</button>
+					</form>
+				</li>
+				 {% else %}
+				<li style="float: right;  background-color:green;">
+					<a href="{% url 'log0Guide' %}" class="button_all">
+						<i style=" color:green" class="glyphicon glyphicon-log-in" aria-hidden="true"> </i>
+					</a>
+				</li>
+				 {% endif %}
+				</ul>
+            </ul>
+	    </div>
+	</section>

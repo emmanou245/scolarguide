@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <form method="POST" action="{% url 'manageInfra' %}"> {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-2 col-lg-2"></div>
+                    <div class="col-md-8 col-lg-8">
+                        <div class="card card-hover">
+                            <div class="box bg-primary" style="color:white; border-radius: 1%">
+                                <div>
+                                   <img style="width:47%; height: 150px; border-radius: 8%; float: right; margin-top:%" src="{% static 'images/logo-text.png' %}" alt="établissement">
+                                   <img style="width:47%; height: 150px; border-radius: 8%" src="{% static 'public/images/accueil1.jpg' %}" alt="cycle"><hr>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 m-t-15">Etat : </label>
+                                            <div class="col-md-9">
+                                                <select name="state_inf" class="select2 form-control custom-select" style="width: 100%;">
+                                                    <option>---- Etat de l'infrastructure ----</option>
+                                                    <option value="Bien">Bien</option>
+                                                    <option value="Assez-Bien">Assez-Bien</option>
+                                                    <option value="Très Bien">Très Bien</option>
+                                                    <option value="Passable">Passable</option>
+                                                    <option value="Médiocre">Médiocre</option>
+                                                    <option value="Incomplet">Incomplet</option>
+                                                    <option value="Mauvais">Mauvais</option>
+                                                    <option value="Urgence">Urgence</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 m-t-15">Titre * : </label>
+                                            <div class="col-md-9">
+                                                <input name="name_inf" type="text" class="form-control" placeholder="Nom ou titre de l'infrastructure">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-sm-4 text-right">Status * :</label>
+                                        <div class="custom-control custom-radio" style="margin-left : 40%; margin-top:-10%">
+                                            <input type="radio" class="custom-control-input" id="customControlValidation1" name="status_inf" value="Privée" required>
+                                            <label class="custom-control-label" for="customControlValidation1"> Privée </label>
+                                        </div>
+                                         <div class="custom-control custom-radio" style="margin-left : 70%; margin-top:-7%">
+                                            <input type="radio" class="custom-control-input" id="customControlValidation2" name="status_inf" value="Partagée" required>
+                                            <label class="custom-control-label" for="customControlValidation2"> Partagée </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-sm-4 text-right">Abréviation *</label>
+                                        <div class=" " style="margin-left : 40%; margin-top:-10%">
+                                            <input type="text" class="form-control" name="abbrv_inf" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6" style="margin-top:-8%">
+
+                                         <div class="custom-control custom-radio" style="margin-left : 70%; margin-top:-7%">
+                                            <input type="hidden" class="custom-control-input" id="customControlValidation6" name="class_or_inf" value="1" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" style="margin-left: 50%; margin-top:-8%">
+                                        <label class="col-sm-4 text-right">Image Infra. * :</label>
+                                        <div class="col-md-7">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="validatedCustomFile" name="img_inf" required>
+                                                <label class="custom-file-label" for="validatedCustomFile">Choisir img</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-2 m-t-15">Cycle : </label>
+                                    <div class="col-md-4">
+                                        <select  name="id_ccl" class="select2 form-control m-t-15" style="height: 36px;width: 100%;" required>
+                                            {% for cycle in cycles %}
+                                            <option value="0">--------------------</option>
+                                            <option value="{{cycle.id}}">
+                                                 {{cycle.name_ccl}}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row" style="margin-top:-9%; margin-left:51%">
+                                    <label class="col-md-4 m-t-15 text-right">Etabliss. :</label>
+                                    <div class="col-md-8">
+                                        <select  name="id_sch" class="select2 form-control m-t-15" style="height: 36px;width: 100%;" required>
+                                            {% for school in schools %}
+                                            <option value="0">--------------------</option>
+                                            <option value="{{school.id}}">{{school.name_sch}} | {{school.arrondissement}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-md-2">Description *: </label>
+                                    <textarea name="desc_inf" class="form-control col-md-4">
+                                    </textarea>
+                                    <label class="col-md-3 text-right">Lettre | Numeéro * : </label>
+                                    <select name="id_let" class="form-control col-md-2" style="height: 80%">
+                                        {% for letter in letters %}
+                                        <option value="0">----------</option>
+                                        <option value="{{letter.id}}">{{letter.name_lta}} | {{letter.num_lta}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <input value="Appliquer" type="submit" class="btn btn-lg btn-block btn-outline-warning" id="ts-warning">
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+    </div>
+</body>
+
+</html>

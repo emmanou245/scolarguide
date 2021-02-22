@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <form method="POST" action="{% url 'manageInfra' %}"> {% csrf_token %}
+                    <input type="hidden" name="id_sch" value="{{school.id}}">
+                    <input type="hidden" name="class_or_inf" value="0">
+                <div class="row">
+                        <div class="card col-md-6">
+                            <div class="card-body">
+                                <h4 class="card-title">Création | ajout d'une salle de classe</h4>
+                                <div class="form-group row">
+                                    <label for="name_inf" class="col-sm-2 text-right control-label col-form-label">Classe *:</label>
+                                    <div class="col-sm-4">
+                                        <input name="name_inf" type="text" maxlength="18" minlength="3" class="form-control" id="name_inf" placeholder="nom de la classe">
+                                    </div>
+                                    <label for="abbrv_inf" class="col-sm-2 text-right control-label col-form-label">Abrév. * :</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" maxlength="5" minlength="3" class="form-control" name="abbrv_inf" id="abbrv_inf" placeholder="abréviation">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="status_inf" class="col-sm-2 text-right control-label col-form-label">Status * :</label>
+                                    <div class="col-sm-4">
+                                        <select name="status_inf" class="form-control" id="status_inf">
+                                            <option>--S. juridique --</option>
+                                            <option>Privée</option>
+                                            <option>Partagée</option>
+                                        </select>
+                                    </div>
+                                    <label for="state_inf" class="col-sm-2 text-right control-label col-form-label">Etat * :</label>
+                                    <div class="col-sm-4">
+                                        <select name="state_inf" id="state_inf" class="select2 form-control custom-select" style="width: 100%;">
+                                            <option>-- Appréciation --</option>
+                                            <option value="Bien">Bien</option>
+                                            <option value="Assez-Bien">Assez-Bien</option>
+                                            <option value="Très Bien">Très Bien</option>
+                                            <option value="Passable">Passable</option>
+                                            <option value="Médiocre">Médiocre</option>
+                                            <option value="Incomplet">Incomplet</option>
+                                            <option value="Mauvais">Mauvais</option>
+                                            <option value="Urgence">Urgence</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-right control-label col-form-label">Description * :</label>
+                                    <div class="col-sm-9">
+                                        <textarea name="desc_inf" id="editor" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-md-6">
+                            <div class="card-body">
+                                <h4 class="card-title">.</h4>
+                                <div class="form-group row">
+                                    <label for="total_boys" class="col-sm-2 text-right control-label col-form-label">Tt. G.</label>
+                                    <div class="col-sm-4">
+                                        <input name="total_boys" type="number" maxlength="2" max="60" min="0" class="form-control" id="total_boys" placeholder="Tottal Garçon">
+                                    </div>
+                                    <label for="total_girls" class="col-sm-2 text-right control-label col-form-label">Tt. F.</label>
+                                    <div class="col-sm-4">
+                                        <input name="total_girls" type="number" maxlength="2" max="60" min="0" class="form-control" id="total_girls" placeholder="Tottal Fille">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="total_tables" class="col-sm-2 text-right control-label col-form-label">T.-Banc.</label>
+                                    <div class="col-sm-4">
+                                        <input name="total_tables" type="number" maxlength="2" max="40" min="0" class="form-control" id="total_tables" placeholder="Total Tables-banc">
+                                    </div>
+                                    <label for="total_handic" class="col-sm-2 text-right control-label col-form-label">Tt. H.</label>
+                                    <div class="col-sm-4">
+                                        <input name="total_handic" type="number" maxlength="2" max="10" min="0" class="form-control" id="total_handic" placeholder="Total Handicapés">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="capacity" class="col-sm-2 text-right control-label col-form-label">Capacité:</label>
+                                    <div class="col-sm-4">
+                                        <input name="capacity" type="number" maxlength="2" max="40" min="0" class="form-control" id="capacity" placeholder="Total élèves">
+                                    </div>
+                                    <label for="id_let" class="col-sm-2 text-right control-label col-form-label">Lettre * :</label>
+                                    <div class="col-sm-4">
+                                        <select name="id_let" id="id_let" class="form-control">
+                                            <option value="0">----------</option>
+                                            {% for letter in letters %}
+                                            <option value="{{letter.id}}">{{letter}}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="id_ccl" class="col-sm-2 text-right control-label col-form-label">Cycle * :</label>
+                                    <div class="col-sm-3">
+                                        <select  name="id_ccl" id="id_ccl" class="select2 form-control m-t-15" style="height: 36px;width: 100%;" required>
+
+                                            <option value="0">----------</option>
+                                            {% for offre in offres %}
+                                            <option value="{{offre.cycle.id}}">{{offre.cycle}}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <a class="related-widget-wrapper-link add-related" id="add_id_letter"
+                                            href="{% url 'manageOffer' %}"
+                                           title="Ajouter d'abord une offre de cycle s'il n'est pas dans la liste"><img src="/static/admin/img/icon-addlink.svg" alt="Add">
+                                        </a>
+                                    </div>
+                                    <label for="img_inf" class="col-sm-2 text-right control-label col-form-label">Image * :</label>
+                                    <div class="col-sm-4">
+                                        <div class="custom-file" id="img_inf">
+                                            <input type="file" class="custom-file-input" id="validatedCustomFile" name="img_inf" required>
+                                            <label class="custom-file-label" for="validatedCustomFile">Choisir img</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-top">
+                                <div class="card-body" style="margin-top:15%; float: right">
+                                    <button type="submit" class="btn btn-success"><span class="fas fa-check"></span> Soumettre</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+    </div>
+</body>
+
+</html>

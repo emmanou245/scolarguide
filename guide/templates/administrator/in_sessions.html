@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <form method="GET" action="{% url 'manageSession' %}"> {% csrf_token %}
+                    <input type="hidden" value="{{school.id}}" name="id_sch">
+                <div class="row">
+                    <div class="col-md-1 col-lg-1"></div>
+                    <div class="col-md-8 col-lg-10">
+                        <div class="card card-hover">
+                            <div class="box bg-danger" style="color:white; border-radius: 1%">
+                                <div>
+                                   <img style="width:33%; height: 150px; border-radius: 8%; float: right; margin-top:%" src="{% static 'images/logo-text.png' %}" alt="établissement">
+                                   <img style="width:33%; height: 150px; border-radius: 8%" src="{% static 'public/images/accueil1.jpg' %}" alt="cycle">
+                                   <img style="width:33%; height: 150px; border-radius: 8%" src="{% static 'public/images/accueil2.jpg' %}" alt="cycle"><hr>
+                                </div>
+                                <div class="card" style="background-color:green">
+                                    <div class="card-body row">
+                                        <h3 class="card-title m-b-0 col-md-6">Liste des salles de classe </h3>
+                                        <h4 class="card-title m-b-0 col-md-3 text-right">Année scolaire :</h4>
+                                        <p class="col-md-3">
+                                            <label class="text-right">20</label>
+                                            <input style="border-radius: 10%; width:30%"
+                                                class="" type="number" name="inf_ann" placeholder="16" required>
+                                            <label class=" text-right" style="float: ;"> | 20</label>
+                                            <input style="border-radius: 10%; width:30%"
+                                                class="" type="number" name="sup_ann" placeholder="17" required>
+                                        </p>
+                                    </div>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col">CLASSE</th>
+                                                        <th scope="col">Saisir Eff. total FIL.</th>
+                                                        <th scope="col">Saisir Eff. total GAR.</th>
+                                                        <th scope="col">+ Tt T.-bancs</th>
+                                                        <th scope="col">Tt Handicapés</th>
+                                                        <th>
+                                                            <label class="customcheckbox m-b-20">
+                                                                <input type="checkbox" id="mainCheckbox" />
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="customtable">
+                                                    {% for classe in classes %}
+                                                    <tr>
+                                                        <td>{{classe.abbrv_inf}} [{{classe.letter}}]</td>
+                                                        <td><input value="20" max="70" style="width:50%" class="form-control" min="0" maxlength="2" type="number" name="total_girls{{classe.id}}"></td>
+                                                        <td><input value="20" max="70" style="width:50%" class="form-control" min="0" maxlength="2" type="number" name="total_boys{{classe.id}}"></td>
+                                                        <td><input value="5" max="10" style="width:50%" class="form-control" min="0" maxlength="2" type="number" name="total_tables{{classe.id}}"></td>
+                                                        <td><input value="0" max="10" style="width:50%" class="form-control" min="0" maxlength="2" type="number" name="total_handic{{classe.id}}"></td>
+                                                        <th>
+                                                            <label class="customcheckbox">
+                                                                <input name="{{classe.name_inf}}" value="{{classe.name_inf}}" type="checkbox" class="listCheckbox" />
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </th>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <input style="width:50%; float: right" value="Soumettre afin d'ouvir la session" type="submit" class="btn btn-lg btn-block btn-primary" id="ts-primary">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+    </div>
+</body>
+
+</html>

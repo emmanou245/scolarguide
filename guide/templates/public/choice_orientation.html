@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../public/_head.html' %}
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+	<!-- Top Header_Area -->
+    {% include '../public/top_header_area.html' %}
+	<!-- End Top Header_Area -->
+
+	<!-- Header_Area -->
+    {% include '../public/main_navbar.html' %}
+	<!-- End Header_Area -->
+
+    <!-- Our Features Area -->
+    <section class="our_feature_area what_we_area row">
+        <div class="container">
+            <div class="tittle wow fadeInUp">
+                <h2>Orientation de votre choix</h2>
+                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+            </div>
+            <div class="feature_row row construction_iner">
+                <div class="col-md-4 col-sm-6 construction wow fadeIn">
+                   <div class="cns-img">
+                        <img src="{% static 'public/images/stats.jpg' %}" alt="">
+                   </div>
+                   <div class="cns-content">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <a href="#">RESULTATS AUX EXAMENS OFFICIELS</a>
+                        <p>Lorem Ipsum is simply dummy text of the print-ing and typesetting industry. Lorem Ipsum has been the industry's standard dummy </p>
+                   </div>
+                </div>
+                <div class="col-md-4 col-sm-6 construction wow fadeIn" data-wow-delay="0.2s">
+                   <div class="cns-img">
+                        <img src="{% static 'public/images/slider-2.jpg' %}" alt="">
+                   </div>
+                   <div class="cns-content">
+                        <i class="fa fa-keyboard-o" aria-hidden="true"></i>
+                        <a href="#">LES INFRASTRUCTURES</a>
+                        <p>Lorem Ipsum is simply dummy text of the print-ing and typesetting industry. Lorem Ipsum has been the industry's standard dummy </p>
+                   </div>
+                </div>
+                <div class="col-md-4 col-sm-6 construction wow fadeIn" data-wow-delay="0.4s">
+                   <div class="cns-img">
+                        <img src="{% static 'public/images/slider-3.jpg' %}" alt="">
+                   </div>
+                   <div class="cns-content">
+                        <i class="fa fa-gavel" aria-hidden="true"></i>
+                        <a href="#">L'EXPERIENCE DU PERSONNEL</a>
+                        <p>Lorem Ipsum is simply dummy text of the print-ing and typesetting industry. Lorem Ipsum has been the industry's standard dummy </p>
+                   </div>
+                </div>
+                <div class="col-md-6 feature_content">
+                    <div class="subtittle">
+                        <h2>Comment choisir ?</h2>
+                        <h5>There are many variations of passages of Lorem Ipsum available.</h5>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <a href="#">Années d'EXPERIENCE</a>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting indus-try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <a href="#">La distance</a>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting indus-try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <a href="#">Expérience du personnel</a>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting indus-try. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 feature_content">
+                    <img src="{% static 'images/logo-icon.png'%}"><h1 style="text-align: center">MINEDUB</h1>
+                    <img style="width: 584px; height: 404px" src="{% static 'images/logo-text.png'%}">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Area -->
+{% include '../public/_footer.html' %}
+    <!-- End Footer Area -->
+
+    {% include '../public/javascript.html' %}
+
+</body>
+</html>
+

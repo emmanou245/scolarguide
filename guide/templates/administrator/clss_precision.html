@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+
+                <hr><h4>{{ this_class.name_inf }} :
+                    <label style="margin-left:10%">{{ this_class.abbrv_inf }} : {{ this_class.letter }} </label>
+                </h4><hr>
+
+                <form method="POST" action="{% url 'submitStatClass' %}">{% csrf_token %}
+                    <input type="hidden" name="id_sch" value="{{this_school.id}}">
+                    <input type="hidden" name="id_cls" value="{{id_cls}}">
+                {% for detail in details %}
+                    <div class="form-group row">
+                    {% if detail.sex.name_sex != sex %}
+                        <div class="col-md-6 box bg-warning" style="color:white;">
+                            <input type="hidden" name="id_dtl{{detail.id}}" value="{{detail.id}}">
+                            <input type="hidden" name="sexF{{detail.id}}" value="{{detail.sex.id}}">
+                            <h5 class="card-title" >{{detail}}</h5>
+
+                            <hr>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. réussites </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.tt_win}}Fwin" value="{{detail.tt_win}}" type="number"
+                                           class="form-control" placeholder="{{detail.tt_win}}" min="0"
+                                           max="{{detail.infrastructure.total_girls}}">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. E. Spéciale 1 </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.student_sp1}}Fstudent_sp1" value="{{detail.student_sp1}}" type="number" class="form-control" placeholder="{{detail.student_sp1}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. H. Visuel </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.handic_v}}Fv" value="{{detail.handic_v}}" type="number" class="form-control" placeholder="{{detail.handic_v}}" min="0" max="{{detail.infrastructure.total_handic}}">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. E. Spéciale 3 :</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.student_sp3}}Fstudent_sp3" value="{{detail.student_sp3}}" type="number" class="form-control" placeholder="{{detail.student_sp3}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. H. Moteur:</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.handic_m}}Fm" value="{{detail.handic_m}}" type="number" class="form-control" placeholder="{{detail.handic_m}}" min="0" max="{{detail.infrastructure.total_handic}}">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. E. Spéciale 2 </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.student_sp2}}Fstudent_sp2" value="{{detail.student_sp2}}" type="number" class="form-control" placeholder="{{detail.student_sp2}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. H. Auditif :</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.handic_a}}Fa" value="{{detail.handic_a}}" type="number" class="form-control" placeholder="{{detail.handic_a}}" min="0" max="{{detail.infrastructure.total_handic}}">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. sans actes :</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.ss_acte}}Facte" value="{{detail.ss_acte}}" type="number" class="form-control" placeholder="{{detail.ss_acte}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. de réfugiés :</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.refug}}Frefug" value="{{detail.refug}}" type="number" class="form-control" placeholder="{{detail.refug}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. de déplacés :</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.depla}}Fdepla" value="{{detail.depla}}" type="number" class="form-control" placeholder="{{detail.depla}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. abandons : </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.tt_abd}}Fabd" value="{{detail.tt_abd}}" type="number"
+                                           class="form-control" placeholder="{{detail.tt_abd}}" min="0"
+                                           max="{{detail.infrastructure.capacity}}">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-control"><u>Total de filles : </u></label>
+                                </div>
+                                <div class="col-lg-1">
+                                    {{detail.infrastructure.total_girls}}
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="col-md-6 box bg-success" style="float: right; background-color:red; color:white">
+                            <input type="hidden" name="id_dtl{{detail.id}}" value="{{detail.id}}">
+                            <input type="hidden" name="sexG{{detail.id}}" value="{{detail.sex.id}}">
+                            <h5 class="card-title" >{{detail}}</h5>
+                            <hr>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. réussites </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.tt_win}}Gwin" value="{{detail.tt_win}}"
+                                           type="number" class="form-control" placeholder="{{detail.tt_win}}"
+                                           min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. E. Spéciale 1 </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.student_sp1}}Gstudent_sp1" value="{{detail.student_sp1}}" type="number" class="form-control" placeholder="{{detail.student_sp1}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. H. Visuel </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.handic_v}}Gv" value="{{detail.handic_v}}" type="number" class="form-control" placeholder="{{detail.handic_v}}" min="0" max="{{detail.infrastructure.total_handic}}">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. E. Spéciale 3 :</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.student_sp3}}Gstudent_sp3" value="{{detail.student_sp3}}" type="number" class="form-control" placeholder="{{detail.student_sp3}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. H. Moteur:</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.handic_m}}Gm" value="{{detail.handic_m}}" type="number" class="form-control" placeholder="{{detail.handic_m}}" min="0" max="{{detail.infrastructure.total_handic}}">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. E. Spéciale 2 </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.student_sp2}}Gstudent_sp2" value="{{detail.student_sp2}}" type="number" class="form-control" placeholder="{{detail.student_sp2}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. H. Auditif :</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.handic_a}}Ga" value="{{detail.handic_a}}" type="number" class="form-control" placeholder="{{detail.handic_a}}" min="0" max="{{detail.infrastructure.total_handic}}">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. sans actes :</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.ss_acte}}Gacte" value="{{detail.ss_acte}}" type="number" class="form-control" placeholder="{{detail.ss_acte}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. de réfugiés :</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.refug}}Grefug" value="{{detail.refug}}" type="number" class="form-control" placeholder="{{detail.refug}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. de déplacés :</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.depla}}Gdepla" value="{{detail.depla}}" type="number" class="form-control" placeholder="{{detail.depla}}" min="0" max="{{detail.infrastructure.total_boys}}">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label class="control-control">Tt. abandons : </label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input name="{{detail.tt_abd}}Gabd" value="{{detail.tt_abd}}" type="number"
+                                           class="form-control" placeholder="{{detail.tt_abd}}" min="0"
+                                           max="{{detail.infrastructure.capacity}}">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-control"><u>Total de garçons : </u></label>
+                                </div>
+                                <div class="col-lg-1">
+                                    {{detail.infrastructure.total_boys}}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    </div>
+                {% endfor %}
+                        <input style="margin:2%; margin-left: 50%; float:right" type="submit" class="btn btn-primary btn-lg" name="submit" value="Soumettre les modifications">
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+
+</body>
+
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../public/_head.html' %}
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+	<!-- Top Header_Area -->
+    {% include '../public/top_header_area.html' %}
+	<!-- End Top Header_Area -->
+
+	<!-- Header_Area -->
+    {% include '../public/main_navbar.html' %}
+	<!-- End Header_Area -->
+
+    <!-- Banner area -->
+    <section class="banner_area" data-stellar-background-ratio="0.5">
+        <h2>{{title}} : {{school.name_sch}}</h2>
+        <ol class="breadcrumb">
+            <li><a href="../accueil">Accueil</a></li>
+            <li><a href="#" class="active">{{school.name_sch}}</a></li>
+        </ol>
+    </section>
+    <!-- End Banner area -->
+
+    <!-- blog area -->
+    <section class="blog_all">
+        <div class="container">
+            <div class="row m0 blog_row">
+                <div class="col-sm-8 main_blog">
+                    <img style="width: 400px; height: 400%" src="{% static school.img_sch %}" alt="">
+                    <div class="col-xs-4 p0">
+                        <h4>Nom : {{school.name_sch}}</h4><br>
+                        <h5>Ordre : {{school.order}}</h5><br>
+                        <h5>Système : {{school.system_sch}}</h5><br>
+                        <h5>Cycle : {{school.cycle_complete}}</h5><br>
+                        <h5>Régime : {{school.regime_sch}}</h5><br>
+                        <h5 class="blog_admin" href="#"><i class="fa fa-user" aria-hidden="true"></i> Chef d'établissement : <></h5><br>
+                        <h5>Dernière modification : {{school.last_modify_sch}}</h5><br>
+                        <h5><a style="border-radius:0%; float:right" class="btn btn-primary
+                        fa fa-map-o" href="{% url 'publicMapSchool' school.id%}"> Voir sur une carte</a></h5>
+                    </div>
+                    <div class="col-xs-11 blog_content"><br>
+                        <h4>Description :</h4><br>
+                        <p>{{school.desc_sch}}</p><hr>
+
+                        <div class="tag">
+                            <h4>Cycles et salles de classe proposés : [ Total = {{classes.count}} ]</h4>
+                            {% for offer in offers %}
+
+                            <div class="row">
+                                <a href="#" style="width: 31%" class="col-md-4">
+                                    <img style="width: 53px; height: 100px" src="{% static offer.cycle.img_ccl %}" alt="">
+                                    {{offer.cycle.name_ccl}}
+                                </a>
+                                    {% for classe in classes %}
+                                        {% if classe.cycle.id == offer.cycle.id %}
+                                <div class="media col-md-4">
+                                    <div class="">
+                                        <a href="#">
+                                            <img class="media-object" style="height: 100px; width: 200px" src="{% static classe.img_inf %}" alt="">
+                                        </a>
+                                    <a href="#"><i class="fa fa-arrow-right" aria-hidden="true"></i>{{classe.name_inf}}
+                                            : {{classe.abbrv_inf}} | {{classe.letter}}</a>
+                                    <a href="#"><i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                        Description : {{classe.desc_inf}}</a>
+                                    </div>
+
+                                </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                    <section class="our_team_area">
+                        <div class="container" style="width: 80%; float: left">
+                            <div class="tittle wow fadeInUp">
+                                <h2>Le personnel de l'établissement</h2>
+                                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+                            </div>
+                            <div class="row team_row">
+                                {% for appart in apparts %}
+                                <div class="col-md-4 col-sm-4 wow fadeInUp" >
+                                   <div class="team_membar">
+                                        <img style="border-radius: 4%; height: 150px; width: 200px; margin-top : 128px"
+                                             src="{% static appart.personal.img_psl %}" alt="">
+
+                                        <div class="team_content">
+                                            <ul>
+                                                <li><label>Affectation : {{appart.year_affect}}, Expériance : {{appart.personal.anciennete_svr}} ans</label></li>
+                                            </ul>
+                                            {% if appart.personal.genre == 'FEMME' %}
+                                            <a href="#" class="name">Mme {{appart.personal.name_psl}}</a>
+                                            {% else %}
+                                            <a href="#" class="name">Mr {{appart.personal.name_psl}}</a>
+                                            {% endif %}
+                                            <h6>Fonction : {{appart.fonction_psl}}</h6>
+                                        </div>
+                                   </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-sm-4 widget_area">
+                    <div class="resent">
+                        <h3>INFRASTRUCTURES : [ Total = {{infrastrutures.count}} ]</h3>
+                        {% for infrastruture in infrastrutures %}
+                        <div class="media">
+                            <div class="media-body">
+                            </div>
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" style="height: 150px; width: 350px" src="{% static infrastruture.img_inf %}" alt="">
+                                </a><br>
+                                <label >Titre : {{infrastruture.name_inf}}</label><br>
+                                <h6>Depuis : {{infrastruture.last_modify_inf}}</h6>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <br>
+                    <div class="resent">
+                        <h3>COOPERATIVES :</h3>
+                        <ul class="architecture">
+                            <li><a href="#"><i class="fa fa-arrow-right" aria-hidden="true"></i>February 2016</a></li>
+                            <li><a href="#"><i class="fa fa-arrow-right" aria-hidden="true"></i>April 2016</a></li>
+                            <li><a href="#"><i class="fa fa-arrow-right" aria-hidden="true"></i>June 2016</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Area -->
+{% include '../public/_footer.html' %}
+    <!-- End Footer Area -->
+
+    {% include '../public/javascript.html' %}
+
+</body>
+</html>

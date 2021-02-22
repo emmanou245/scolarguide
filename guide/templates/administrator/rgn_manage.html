@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+
+            <div class="container-fluid">
+                <div class="row">
+                    <a href="#addRgn" class="btn btn-outline-primary">Ajouter</a>
+                </div><br>
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    {% if message %}
+                    <div class="alert alert-success" role="alert">
+                      <h4 class="alert-heading">Well done!</h4>
+                      <p>{{ message }}</p>
+                      <hr>
+                      <p class="mb-0">La présente.</p>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="row">
+                {% for region in list_regions %}
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card card-hover bg-success">
+                            <a href="{% url 'precisionRgn' region.id %}" class="btn btn-lg">
+                                <div class="box bg-danger text-center">
+                                    <img style="width: 100%; border-radius: 4px; height: 200px" src="{% static ''%}{{region.img_region}}" alt="Img_rgn" class="light-logo" />
+                                    <hr>
+                                    <h4 style="color: yellow" class="text-white">{{region.name_rgn}} | [{{region.abbrev_rgn}}]</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+                </div>
+                    <div class="col-md-12 col-sm-12"><hr><br><br>
+                        <br><h3 class="page-title" style="text-align: center">Ajout d'une région</h3><hr><br>
+                    </div>
+                <div class="row">
+                <div class="col-md-6 col-lg-3" id="addRgn">
+                    <form method="POST" action="{% url 'manageRgn' %}"> {% csrf_token %}
+                        <div class="card">
+                            <div class="card-body">
+                                <div>
+                                    <label>Entrer le nom de la région :</label>
+                                </div>
+                                <div style="float: right">
+                                    <input class="alert alert-success" style="width:100%;" type="text" name="name_rgn" placeholder="nom">
+                                </div><hr>
+                                <div>
+                                    <label>Entrer l'abréviation :</label>
+                                </div>
+                                <div style="float: right">
+                                    <input class="alert alert-success" style="width:100%;" type="text" name="abbrev_rgn" placeholder="Exple : OUEST = OT">
+                                </div><hr>
+                                <div>
+                                    <label>Choisir une image d'accueil de la région :</label>
+                                </div>
+                                <div style="float: right">
+                                    <input class="alert alert-success" style="width:100%;" type="file" name="img_rgn" value="{{ region.img_region }}">
+                                </div>
+                            </div><hr>
+                            <div>
+                                <input name="addRegion" value="Enregistrer" type="submit" class="btn btn-lg btn-block btn-outline-success" id="ts-success">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Saisir une brêve description du niveau de scolarisation : </h5>
+                                <!-- editor -->
+                                <div class="card">
+                                        <!-- Create the editor container -->
+                                        <div id="editor" style="height: 300px;">
+
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </from>
+            </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+
+</body>
+
+</html>

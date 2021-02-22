@@ -1,0 +1,87 @@
+{% load static %}
+
+<nav class="navbar navbar-default header_aera" id="main_navbar" style="background-color: red; ">
+    <div class="container">
+        <!-- searchForm -->
+        <div class="searchForm">
+            <form method="get" action="{% url 'publicSearch' %}" class="row m0"> {% csrf_token %}
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input style="color: black" type="search" name="search" class="form-control" placeholder="Saisissez votre recherche puis appuiyez sur 'Entrer'">
+                    <span class="input-group-addon form_hide"><i class="fa fa-times"></i></span>
+                </div>
+            </form>
+        </div><!-- End searchForm -->
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="col-md-2 p0">
+            <img style="border-radius: 4%; height: 98px; width: 89%; float: left; margin:1px"
+									 src="{% static 'images/logo-icon.png' %}" alt="">
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="col-md-10 p0">
+            <div class="collapse navbar-collapse" id="min_navbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown submenu">
+                        <a href="/" class="dropdown-toggle" data-toggle="dropdown" style="color: white">
+                            Accueil
+                        </a>
+                        <ul class="dropdown-menu other_dropdwn">
+                            <li><a href="{% url 'Welcome'%}">Accueil</a></li>
+                            <li><a href="{% url 'ChoiceSchool'%}">Choisir une école</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown submenu">
+                        <a href="../etablissements" class="dropdown-toggle" data-toggle="dropdown" style="color: white">
+                            établissements
+                        </a>
+                        <ul class="dropdown-menu other_dropdwn">
+                            <li><a href="{% url 'allSchoolVp'%}">Tous</a></li>
+                            <li><a href="{% url 'Welcome'%}">Francophones</a></li>
+                            <li><a href="{% url 'Welcome'%}">Anglophones</a></li>
+                            <li><a href="{% url 'Welcome'%}">Bilingues</a></li>
+                            <li><a href="{% url 'Welcome'%}">Publiques</a></li>
+                            <li><a href="{% url 'Welcome'%}">Privées</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown submenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white">missions</a>
+                        <ul class="dropdown-menu other_dropdwn">
+                            <li><a href="about.html">Envers les citoyens</a></li>
+                            <li><a href="about-2.html">Envers les établissements</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown submenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white">Services</a>
+                        <ul class="dropdown-menu other_dropdwn">
+                            <li><a href="services.html">Infrastructures</a></li>
+                            <li><a href="services.html">Personnels</a></li>
+                            <li><a href="services.html">Cycles</a></li>
+                            <li><a href="services-2.html">Ordres d'enseignement</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown submenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: white">Statistiques</a>
+                        <ul class="dropdown-menu">
+                            {% for region in regions %}
+
+                            <li><a href="{% url 'statRgn' region.id%}">{{region.name_rgn}}</a></li>
+
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li><a href="#" class="nav_searchFrom"><i class="fa fa-search"></i></a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </div><!-- /.container -->
+    {% if user.is_authenticated %}
+    <a href="{% url 'dashbordAdm' %}">
+        <img style="border-radius: 2%; height: 94px; widht: 72px; float: right; margin-top: -7.2%; margin-right: 0.7%"
+                    src="{% static 'images/logo-text.png' %}" alt="">
+    </a>
+    {% else %}
+        <img style="border-radius: 2%; height: 94px; widht: 72px; float: right; margin-top: -7.2%; margin-right: 0.7%"
+                    src="{% static 'images/logo-text.png' %}" alt="">
+    {% endif %}
+</nav>

@@ -1,0 +1,42 @@
+
+{% load static %}
+
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="p-t-30">
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'dashbordAdm' %}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu"> PANEL DE CONTROL</span></a></li>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'allSchools' %}" aria-expanded="false"><i class="fas fa-briefcase"></i><span class="hide-menu"> ETABLISSEMENTS</span></a></li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'managePers' %}" aria-expanded="false"><i class="fa fa-users"></i><span class="hide-menu"> PERSONNELS</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-chart-areaspline"></i><span class="hide-menu"> STATISTIQUES </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="{% url 'allStats'%}" class="sidebar-link"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu"> Régions |-> Départements <br>|-> Arrondissements </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'allStatsSchools'%}" class="sidebar-link"><i class="fas fa-home"></i><span class="hide-menu"> Etablissements |-> F & G </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-anchor"></i><span class="hide-menu">Gestions DEPENDANTES </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="{% url 'freeSchool'%}" class="sidebar-link"><i class="fas fa-heartbeat"></i><span class="hide-menu"> Etablissements </span></a></li>
+                                <li class="sidebar-item"><a href="authentication-register.html" class="sidebar-link"><i class="fab fa-windows"></i><span class="hide-menu"> Arrondissements </span></a></li>
+                                <li class="sidebar-item"><a href="authentication-register.html" class="sidebar-link"><i class="fab fa-windows"></i><span class="hide-menu"> Départements </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fab fa-windows"></i><span class="hide-menu">Autres GESTIONS </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="{% url 'manageApprt'%}" class="sidebar-link"><i class="fas fa-link"></i><span class="hide-menu"> Appartenances </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'manageOffer'%}" class="sidebar-link"><i class="mdi mdi-alert-octagon"></i><span class="hide-menu"> Offres </span></a></li>
+                                <li class="sidebar-item"><a href="error-405.html" class="sidebar-link"><i class="mdi mdi-alert-octagon"></i><span class="hide-menu"> Cycles </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'manageInfra'%}" class="sidebar-link"><i class="fas fa-home"></i><span class="hide-menu"> Infrastructures </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'stautsPers'%}" class="sidebar-link"><i class="mdi mdi-alert-octagon"></i><span class="hide-menu"> Status pour personnels </span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>

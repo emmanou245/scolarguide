@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="card-body col-md-6">
+                        <div class="card" id="addschs">
+                            <div class="card-body wizard-content">
+                                <h3 class="card-title">Ajouter un status</h3>
+                                <h6 class="card-subtitle"></h6>
+                                <form id="example-form" action="{% url 'stautsPers'%}" method="POST" class="m-t-40">{% csrf_token %}
+                                    <div>
+                                        <section>
+                                            <div class="row">
+                                                 <div class="col-md-6">
+                                                     <div class="form-group row">
+                                                        <label for="label_stp" class="col-sm-4 text-right control-label col-form-label">Label *</label>
+                                                        <div class="col-sm-8">
+                                                            <input  value="{{statu.label_stp}}" placeholder="nom du status" id="label_stp"
+                                                                   minlength="5" name="label_stp" type="text" maxlength="13" class="required form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label for="abbrev_stp" class="col-sm-4 text-right control-label col-form-label">Abrév. *:</label>
+                                                        <div class="col-sm-8">
+                                                            <input value="{{statu.abbrev_stp}}" id="abbrev_stp" name="abbrev_stp" value="{{statu.abbrev_stp}}" type="text"
+                                                                   maxlength="6" class="required form-control" placeholder="abréviation du status">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class=" row">
+                                                        <label for="abr_stp" class="col-md-4 text-right control-label col-form-label">Fonct *:</label>
+                                                        <textarea class="col-md-8  form-control" id="abr_stp" name="abr_stp"  value="{{statu.abr_stp}}"
+                                                                  style="width: 100; height:200px;">
+                                                            {{statu.abr_stp}}
+                                                        </textarea>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-outline-primary" style="float: right; margin: 10%">
+                                                        <span class="far fa-save"></span> Enregistrer
+                                                    </button>
+                                                </div>
+                                            <p>(*) Obligatoire</p>
+                                            </div>
+
+                                        </section>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive col-md-6">
+                        <table id="zero_config" class="table table-striped table-bordered">
+                            <h3 class="page-title">{{ sub_title }}</h3>
+                            <thead>
+                                <tr>
+                                    <th>Label</th>
+                                    <th> Abréviation</th>
+                                    <th>Missions | rôles </th>
+                                    <th style="width: 10%">ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for statu in status %}
+
+                                <tr>
+                                    <td>{{statu.label_stp}}</td>
+                                    <td>{{statu.abbrev_stp}}</td>
+                                    <td>{{statu.abr_stp}}</td>
+                                    <td>
+                                        <div class="row">
+                                            <a href="{% url 'deleteStatus' statu.id %}" class="col-md-6">
+                                                <button type="button" class="btn btn-outline-danger">
+                                                <span class="fas fa-trash-alt"></span></button>
+                                            </a>
+                                            <a href="{% url 'updateStatus' statu.id %}" class="col-md-6 btn btn-outline-warning">
+                                                <span class="fas fa-edit"></span></button>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+
+</body>
+
+</html>

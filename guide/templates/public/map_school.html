@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../public/_head.html' %}
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+	<!-- Top Header_Area -->
+    {% include '../public/top_header_area.html' %}
+	<!-- End Top Header_Area -->
+
+	<!-- Header_Area -->
+    {% include '../public/main_navbar.html' %}
+	<!-- End Header_Area -->
+
+    <!-- Banner area -->
+    <section class="banner_area" data-stellar-background-ratio="0.5">
+        <h2>{{title}} : {{school.name_sch}}</h2>
+        <ol class="breadcrumb">
+            <li><a href="../accueil">Accueil</a></li>
+            <li><a href="#" class="active">{{school.name_sch}}</a></li>
+        </ol>
+        <div class="row container-fluid">
+            <form role="search" class="navbar-form" method="POST" action="{% url 'publicSearch2' %}">{% csrf_token %}
+                <input type="text" style="width:44%" class="form-control" placeholder="Rechercher une autre école" name="search">
+                <select class="form-control" name="search1">
+                    <option value="0">-----------------------------------</option>
+                    {% for school in schools %}
+                    <option value="{{school.name_sch}}">{{school.name_sch}} | {{school.arrondissement}}</option>
+                    {% endfor%}
+                </select>
+                <button type="submit" class="btn btn-primary" style="border-radius:0%; float:rigth">
+                    <span class="fa fa-map-o"></span> Rechercher
+                </button>
+            </form>
+        </div>
+    </section>
+    <!-- End Banner area -->
+
+    <!-- blog area -->
+    <body>
+        <div class="container">
+           <div class="content">
+
+               <div width="110%" style='height:400px'>
+                    {{ my_map|safe }}
+                   {{ my_map1|safe }}
+               </div>
+
+           </div>
+        </div>
+    <!-- Footer Area -->
+    {% include '../public/_footer.html' %}
+    <!-- End Footer Area -->
+
+    {% include '../public/javascript.html' %}
+
+    </body>
+</html>

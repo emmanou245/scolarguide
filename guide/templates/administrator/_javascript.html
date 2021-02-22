@@ -1,0 +1,139 @@
+
+{% load static %}
+
+    <script src="{% static 'libs/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{% static 'libs/popper.js/dist/umd/popper.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="{% static 'libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js' %}"></script>
+    <script src="{% static 'extra-libs/sparkline/sparkline.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'dist/js/waves.js' %}"></script>
+    <!--Menu sidebar -->
+    <script src="{% static 'dist/js/sidebarmenu.js' %}"></script>
+    <!--Custom JavaScript -->
+    <script src="{% static 'dist/js/custom.min.js' %}"></script>
+    <!-- this page js -->
+    <script src="{% static 'libs/inputmask/dist/min/jquery.inputmask.bundle.min.js' %}"></script>
+    <script src="{% static 'extra-libs/multicheck/datatable-checkbox-init.js' %}"></script>
+    <script src="{% static 'extra-libs/multicheck/jquery.multicheck.js' %}"></script>
+    <script src="{% static 'extra-libs/DataTables/datatables.min.js' %}"></script>
+
+    <script src="{% static 'dist/js/pages/mask/mask.init.js' %}"></script>
+    <script src="{% static 'libs/select2/dist/js/select2.full.min.js' %}"></script>
+    <script src="{% static 'libs/select2/dist/js/select2.min.js' %}"></script>
+    <script src="{% static 'libs/jquery-asColor/dist/jquery-asColor.min.js' %}"></script>
+    <script src="{% static 'libs/jquery-asGradient/dist/jquery-asGradient.js' %}"></script>
+    <script src="{% static 'libs/jquery-asColorPicker/dist/jquery-asColorPicker.min.js' %}"></script>
+    <script src="{% static 'libs/jquery-minicolors/jquery.minicolors.min.js' %}"></script>
+    <script src="{% static 'libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'libs/quill/dist/quill.min.js' %}"></script>
+    <script src="{% static 'libs/jquery-steps/build/jquery.steps.min.js'%}"></script>
+    <script src="{% static 'libs/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'libs/chart/matrix.interface.js' %}"></script>
+    <script src="{% static 'libs/chart/excanvas.min.js' %}"></script>
+    <script src="{% static 'libs/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'libs/flot/jquery.flot.pie.js ' %}"></script>
+    <script src="{% static 'libs/flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'libs/flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'libs/flot/jquery.flot.crosshair.js' %}"></script>
+    <script src="{% static 'libs/chart/jquery.peity.min.js' %}"></script>
+    <script src="{% static 'libs/chart/matrix.charts.js' %}"></script>
+    <script src="{% static 'libs/chart/jquery.flot.pie.min.js' %}"></script>
+    <script src="{% static 'libs/flot.tooltip/js/jquery.flot.tooltip.min.js' %}"></script>
+    <script src="{% static 'libs/chart/turning-series.js' %}"></script>
+    <script src="{% static 'dist/js/pages/chart/chart-page-init.js' %}"></script>
+
+    <script>
+        /****************************************
+         *       Basic Table                   *
+         ****************************************/
+        $('#zero_config').DataTable();
+    </script>
+
+    <script>
+        // Basic Example with form
+    var form = $("#example-form");
+    form.validate({
+        errorPlacement: function errorPlacement(error, element) { element.before(error); },
+        rules: {
+            confirm: {
+                equalTo: "#password"
+            }
+        }
+    });
+     form.children("div").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        onStepChanging: function(event, currentIndex, newIndex) {
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+        },
+        onFinishing: function(event, currentIndex) {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+        },
+        onFinished: function(event, currentIndex) {
+            alert("Submitted!");
+        }
+    });
+
+
+    </script>
+
+    <script>
+        //***********************************//
+        // For select 2
+        //***********************************//
+        $(".select2").select2();
+
+        /*colorpicker*/
+        $('.demo').each(function() {
+        //
+        // Dear reader, it's actually very easy to initialize MiniColors. For example:
+        //
+        //  $(selector).minicolors();
+        //
+        // The way I've done it below is just for the demo, so don't get confused
+        // by it. Also, data- attributes aren't supported at this time...they're
+        // only used for this demo.
+        //
+        $(this).minicolors({
+                control: $(this).attr('data-control') || 'hue',
+                position: $(this).attr('data-position') || 'bottom left',
+
+                change: function(value, opacity) {
+                    if (!value) return;
+                    if (opacity) value += ', ' + opacity;
+                    if (typeof console === 'object') {
+                        console.log(value);
+                    }
+                },
+                theme: 'bootstrap'
+            });
+
+        });
+        /*datwpicker*/
+        jQuery('.mydatepicker').datepicker();
+        jQuery('#datepicker-autoclose').datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+
+    </script>
+
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoiZXJpY29uYSIsImEiOiJja2o3b290djI2bW5wMnlxanFmaHUwMWVsIn0.hhrDbffKaap05pjZnVYmJQ';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/satellite-streets-v10',
+         center: [4.0566784, 9.738649599999999],
+         zoom: 17,
+         bearing: 180
+      });
+    </script>

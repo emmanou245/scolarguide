@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <h5 class="card-title"><u> GESTIONS INDEPENDANTES </u></h5>
+                <div class="row">
+                    <div class="col-md-4 col-lg-3 col-xlg-3">
+                        <a href="{% url 'listRgn'%}" style="text-decoration: none">
+                            <div class="card card-hover">
+                                <div class="box bg-success text-center" style="height: 200px">
+                                    <h6 class="text-white">REGIONS</h6>
+                                    <img style="width: 80%; border-radius: 4px;height: 157px" src="{% static 'images/control/regions.jpg' %}" alt="regions" class="light-logo" />
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-4 col-lg-3 col-xlg-3">
+                        <a href="{% url 'allSchools' %}" style="text-decoration: none">
+                            <div class="card card-hover">
+                                <div class="box bg-success text-center"style="height: 200px">
+                                    <h6 class="text-white">ETABLISSEMENTS</h6>
+                                    <img style="width: 80%; border-radius: 4px;height: 157px" src="{% static 'images/logo-text.png' %}" alt="regions" class="light-logo" />
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-4 col-lg-3 col-xlg-3">
+                        <a href="../personal" style="text-decoration: none">
+                            <div class="card card-hover">
+                                <div class="box bg-success text-center" style="height: 200px">
+                                    <h6 class="text-white">PERSONNELS</h6>
+                                    <img style="width: 80%; border-radius: 13px;height: 157px" src="{% static 'images/users/H.png' %}" alt="regions" class="light-logo" />
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-4 col-lg-3 col-xlg-3">
+                        <a href="{% url 'allStats'%}" style="text-decoration: none">
+                            <div class="card card-hover">
+                                <div class="box bg-success text-center" style="height: 200px">
+                                    <h6 class="text-white">STATISTIQUES</h6>
+                                    <img style="width: 100%; border-radius: 13px;height: 157px" src="{% static 'images/stats.jpg' %}" alt="regions" class="light-logo" />
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Column -->
+                    <hr>
+                </div>
+                <hr>
+                <h5 class="card-title"><u>GESTIONS DEPENDANTES</u></h5>
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-4 col-xlg-4">
+                        <div class="card card-hover">
+                            <div class="box bg-danger text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
+                                <h6 class="text-white">DEPARTEMENTS</h6>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Column -->
+                    <div class="col-md-6 col-lg-4 col-xlg-4">
+                        <div class="card card-hover">
+                            <div class="box bg-danger text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                                <h6 class="text-white">ARRONDISSEMENTS</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-4 col-xlg-4">
+                        <a href="{% url 'freeSchool'%}" class="card card-hover">
+                            <div class="box bg-danger text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
+                                <h6 class="text-white">ETABLISSEMENTS</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <hr>
+                    <!-- Column -->
+                </div>
+                <hr>
+                <h5 class="card-title"><u>AUTRES GESTIONS</u></h5>
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-4 col-xlg-4">
+                        <A href="{% url 'manageInfra'%}" class="card card-hover">
+                            <div class="box bg-warning text-center">
+                                <h1 class="font-light text-white"><i class="fa fa-home"></i></h1>
+                                <h6 class="text-white">INFRASTRUTURE</h6>
+                            </div>
+                        </A>
+                    </div>
+                     <!-- Column -->
+                    <div class="col-md-6 col-lg-4 col-xlg-4">
+                        <a href="{% url 'stautsPers'%}" class="card card-hover">
+                            <div class="box bg-warning text-center">
+                                <h1 class="font-light text-white"><i class="fa fa-users"></i></h1>
+                                <h6 class="text-white">GERER LES STATUS DES PERSONNELS</h6>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xlg-4">
+                        <a href="{% url 'manageOffer'%}">
+                            <div class="card card-hover">
+                                <div class="box bg-warning text-center">
+                                    <h1 class="font-light text-white"><i class="fa fa-box "></i></h1>
+                                    <h6 class="text-white">OFFRES</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <hr>
+                    <!-- Column -->
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+
+</body>
+
+</html>

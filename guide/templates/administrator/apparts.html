@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <form method="POST" action=""> {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-2 col-lg-2"></div>
+                    <div class="col-md-8 col-lg-8">
+                        <div class="card card-hover">
+                            <div class="box bg-primary" style="color:white; border-radius: 1%">
+                                <div>
+                                   <img style="width:47%; height: 150px; border-radius: 8%" src="{% static 'images/users/H.png' %}" alt="personnel">
+                                   <img style="width:47%; height: 150px; border-radius: 8%; float: right; margin-top:%" src="{% static 'images/logo-text.png' %}" alt="établissement"><hr>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5 class="card-title">Année d'affectation :</h5>
+                                        <div class="comment-footer">
+                                            <label style="float: ;">20</label>
+                                            <input style="margin: 1%; border-radius: 10%; width:30%" class="btn btn-sm" type="number" name="inf_aff" placeholder="16" required>
+                                            <label style="float: ;"> | 20</label>
+                                            <input style="margin: 1%; border-radius: 10%; width:30%" class="btn btn-sm" type="number" name="sup_aff" placeholder="17" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5 class="card-title" style="">Fonction à occuper :</h5>
+                                        <div class="comment-footer">
+                                            <select class="form-control" name="fonction_psl" required>
+                                                <option value="0">
+                                                    --------------------
+                                                </option>
+                                                <option value="Proviseur">
+                                                    Proviseur
+                                                </option>
+                                                <option value="Surveillant">
+                                                    Surveillant
+                                                </option>
+                                                <option value="Censeur">
+                                                    Censeur
+                                                </option>
+                                                <option value="Enseillant">
+                                                    Enseillant
+                                                </option>
+                                                <option value="Informaticien">
+                                                    Informaticien
+                                                </option>
+                                                <option value="Infirmier">
+                                                    Infirmier
+                                                </option>
+                                                <option value="Sécrétaire">
+                                                    Sécrétaire
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row" style="margin-top:8%">
+                                    <label class="col-md-3 m-t-15">Personnel :</label>
+                                    <div class="col-md-9">
+                                        <select  name="id_psl" class="select2 form-control m-t-15" style="height: 36px;width: 100%;" required>
+
+                                            {% for personal in personals %}
+                                            <option value="0">--------------------</option>
+                                            <option value="{{personal.id}}">
+                                                 {{personal.name_psl}} | {{personal.sec_name_psl}} | {{personal.date_naiss}}
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row" style="margin-top:8%">
+                                    <label class="col-md-3 m-t-15">Etablissement :</label>
+                                    <div class="col-md-9">
+                                        <select  name="id_sch" class="select2 form-control m-t-15" style="height: 36px;width: 100%;" required>
+                                            {% for school in schools %}
+                                            <option value="0">--------------------</option>
+                                            <option value="{{school.id}}">{{school.name_sch}} | {{school.arrondissement}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            <input value="Appliquer" type="submit" class="btn btn-lg btn-block btn-outline-warning" id="ts-warning">
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+    </div>
+</body>
+
+</html>

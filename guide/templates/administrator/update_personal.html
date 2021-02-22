@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <hr>
+                        <div class="card" id="addpers">
+                            <div class="card-body wizard-content">
+                            <h3 class="card-title">Ajouter un établissement</h3>
+                            <h6 class="card-subtitle"></h6>
+                            <form id="example-form" action="{% url 'allSchools'%}" method="POST" class="m-t-40">{% csrf_token %}
+                                <div>
+                                    <h3>Informations publics</h3>
+
+                                    <section>
+                                        <div class="row">
+                                             <div class="col-md-6">
+                                                 <div class="form-group row">
+                                                    <label for="name_sch" class="col-sm-4 text-right control-label col-form-label">Nom de l'établissement *</label>
+                                                    <div class="col-sm-8">
+                                                        <input id="name_sch" name="name_sch" type="text" maxlength="31" class="required form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 text-right control-label col-form-label">Directeur *</label>
+                                                    <div class="col-sm-8">
+                                                        <select name="personal" id="personal" class="form-control">
+                                                            <option value="">---------</option>
+                                                            {% for personal in personals %}
+                                                                {% for appart in apparts %}
+                                                                    {% if appart.personal.id != personal.id %}
+                                                            <option value="{{personal.id}}">{{personal.name_psl}}</option>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="addr_sch" class="col-sm-4 text-right control-label col-form-label">Adresse *:</label>
+                                                    <div class="col-sm-8">
+                                                        <input id="addr_sch" name="addr_sch" type="email" maxlength="53" class="required form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" style="float:right">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 text-right control-label col-form-label">Logo * :</label>
+                                                    <div class="col-sm-8">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" name="img_sch" id="validatedCustomFile" required>
+                                                            <label class="custom-file-label" for="validatedCustomFile">Choisir une image...</label>
+                                                        </div><hr>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 text-right">Cycle *</label>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" id="customControlValidation3" name="cycle_complete" value="Complet" required>
+                                                        <label class="custom-control-label" for="customControlValidation3"> Complet </label>
+                                                    </div>
+                                                     <div class="custom-control custom-radio" style="margin-left : 10%">
+                                                        <input type="radio" class="custom-control-input" id="customControlValidation4" name="cycle_complete" value="Incomplet" required>
+                                                        <label class="custom-control-label" for="customControlValidation4"> Incomplet </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-sm-4 text-right">Système *</label>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" class="custom-control-input" id="customControlValidation1" name="system_sch" value="Francophone" required>
+                                                        <label class="custom-control-label" for="customControlValidation1"> Francophone </label>
+                                                    </div>
+                                                     <div class="custom-control custom-radio" style="margin-left : 10%">
+                                                        <input type="radio" class="custom-control-input" id="customControlValidation2" name="system_sch" value="Anglophone" required>
+                                                        <label class="custom-control-label" for="customControlValidation2"> Anglophone </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>(*) Obligatoire</p>
+                                    </section>
+
+                                    <h3>Informations publics (suite)</h3>
+                                    <section class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 text-right control-label col-form-label">Description *</label>
+                                                <div class="card col-sm-8">
+                                                            <input id="desc_sch" name="desc_sch" type="text" class="required form-control">
+                                                </div>
+                                            </div>
+                                             <div class="form-group row">
+                                                <label class="col-sm-4 text-right control-label col-form-label">A.P.E.E *</label>
+                                                <div class="col-sm-8">
+                                                    <div class="custom-control custom-radio col-sm-4">
+                                                        <input type="radio" class="custom-control-input" id="customControlValidation5" name="exit_apee_sch" value="oui" required>
+                                                        <label class="custom-control-label" for="customControlValidation5"> OUI </label>
+                                                    </div>
+                                                     <div class="custom-control custom-radio col-sm-4" style="margin-left : 10%">
+                                                        <input type="radio" class="custom-control-input" id="customControlValidation6" name="exit_apee_sch" value="non" required>
+                                                        <label class="custom-control-label" for="customControlValidation6"> NON </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="code_sch" class="col-sm-4 text-right control-label col-form-label">Code *</label>
+                                                <div class="col-sm-8">
+                                                    <input id="code_sch" name="code_sch" type="text" maxlength="10" class="required form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 text-right">Régime d'étude *</label>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" class="custom-control-input" id="customControlValidation7" name="regime_sch" value="PLEIN-TEMPS" required>
+                                                    <label class="custom-control-label" for="customControlValidation7"> PLEIN-TEMPS </label>
+                                                </div>
+                                                 <div class="custom-control custom-radio" style="margin-left : 10%">
+                                                    <input type="radio" class="custom-control-input" id="customControlValidation8" name="regime_sch" value="MI-TEMPS" required>
+                                                    <label class="custom-control-label" for="customControlValidation8"> MI-TEMPS </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" style="float:right">
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 text-right">Zone *</label>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" class="custom-control-input" id="customControlValidation9" name="zone_sch" value="URBAINE" required>
+                                                    <label class="custom-control-label" for="customControlValidation9"> URBAINE </label>
+                                                </div>
+                                                 <div class="custom-control custom-radio" style="margin-left : 10%">
+                                                    <input type="radio" class="custom-control-input" id="customControlValidation10" name="zone_sch" value="RURALE" required>
+                                                    <label class="custom-control-label" for="customControlValidation10"> RURALE </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 text-right control-label col-form-label">Ordre *</label>
+                                                <div class="col-sm-8">
+                                                    <select name="order" class="required form-control">
+                                                        <option value="rien">-------</option>
+                                                        {% for or in orders %}
+                                                        <option value="{{or.id}}">{{or.name_ord}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-4 text-right control-label col-form-label">Arrondissement *</label>
+                                                <div class="col-sm-8">
+                                                    <select class="select2 form-control m-t-15 required" style="height: 36px;width: 100%;" name="arrondissement">
+                                                    {% for arr in arrs %}
+                                                        <option value="{{arr.id}}">{{arr.name_arr}}</option>
+                                                    {%endfor%}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <p>(*) Obligatoire</p>
+                                    </section>
+
+                                    <h3>Coordonnées: </h3>
+                                    <section>
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                 <div class="form-group row">
+                                                    <label for="Logitude" class="col-sm-4 text-right control-label col-form-label">Logitude *</label>
+                                                    <div class="col-sm-8">
+                                                        <input id="Logitude" name="longitude_sch" type="number" max="14.50000" maxlength="8" class="required form-control" placeholder="Max=14.50000">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="Latitude" class="col-sm-4 text-right control-label col-form-label">Latitude *</label>
+                                                    <div class="col-sm-8">
+                                                        <input id="Latitude" name="latitude_sch" type="number" min="6.25698" maxlength="8" class="required form-control" placeholder="min=6.25698">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="Haltitude" class="col-sm-4 text-right control-label col-form-label">Haltitude *:</label>
+                                                    <div class="col-sm-8">
+                                                        <input id="Haltitude" name="altitude_sch" type="number" value="15" maxlength="8" class="form-control" placeholder="Par défaut à 15">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-outline-primary" style="float: right">
+                                            <span class="far fa-save"></span> Enregistrer
+                                        </button>
+                                    </section>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+
+</body>
+

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <div class="row card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="zero_config" class="table table-striped table-bordered">
+                                <h3 class="page-title">{{ sub_title }}</h3>
+                                <a style="float: right;margin-top:-3.5%; margin-right:1%" href="#addschs" class="btn btn-outline-primary">Ajouter</a>
+                                <thead>
+                                    <tr>
+                                        <th>NOM  & ORDRE & SYSTEME</th>
+                                        <th style="width: 130px">POUCENTAGES</th>
+                                        <th>ADRESSE & CHEF D'étab.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                {% for school in schools %}
+
+                                    <tr>
+                                        <td>{{school.name_sch}}<hr>Ecole: {{school.order}}  {{school.system_sch}}
+                                            <hr>Régime : {{school.regime_sch}}
+                                        </td>
+                                        <td>
+                                            {% for infrastructure in infrastructures %}
+                                                {% if infrastructure.school.id == school.id and infrastructure.class_or_inf == '0' %}
+                                            <label> {{ infrastructure }} : </label><br>
+                                                    {% for detail in details %}
+                                                        {% if detail.infrastructure.id == infrastructure.id %}
+                                                            {% if infrastructure.total_boys != 0 %}
+                                                                {% if detail.sex.id != sexG.id %}
+                                            {{detail.year_dtl}}<br>
+                                                <label>Garçons = {{detail.tt_win }} / {{ infrastructure.total_boys }} x100 % </label>
+                                                                {% else %}
+                                                <label>Filles =  {{detail.tt_win }} / {{ infrastructure.total_girls }} x100% </label>
+                                                                {% endif %}
+                                                            {% else %}
+                                                <label> 0 % </label>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                        <td>{{school.arrondissement.name_arr}} - {{school.addr_sch}}<br>
+                                            {% for appart in apparts %}
+                                            {% if appart.fonction_psl == 'Proviseur' and appart.school.id == school.id %}
+                                            Proviseur : <span style="float: right">{{appart.personal}}</span>
+
+                                            {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+
+                                {% endfor %}
+
+                            </table>
+                        </div><hr>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+
+</body>
+
+</html>

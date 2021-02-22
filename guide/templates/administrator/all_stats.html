@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Cards -->
+                <div class="row">
+                    {% for region in regions %}
+                    <div class="col-md-6">
+                        <div class="card m-t-0">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label style="color: green; margin:10%">{{region.name_rgn}}</label><br>
+                                    <label style="color: red; margin:10%">
+                                        <img style="width: 200px" src="{% static region.img_region%}" alt="{% static region.img_region%}">
+                                        <h3 class="mb-0 font-weight-bold">{{region.abbrev_rgn}}</h3>
+                                    </label>
+                                </div>
+                                <div class="col-md-4 border-left text-center p-t-10">
+
+                                    <h4 style="color:green" class="text-muted">Francophone </h4>
+                                    <span class="text-muted">Filles :</span><br>
+                                    <span class="text-muted">Garçons :</span>
+                                </div>
+                                <div class="col-md-4 border-left text-center p-t-10">
+                                    <h4 style="color: orange" class="text-muted">Anglophone </h4>
+                                    <span class="text-muted">Filles :</span><br>
+                                    <span class="text-muted">Garçons :</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- End cards -->
+                <!-- Tabs -->
+                <div class="card">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        {% for region in regions %}
+                        <li class="nav-item">
+                            <a class="nav-link p-20 btn btn-primary" data-toggle="tab" href="#{{region.name_rgn}}" role="tab">
+
+                                <span style="color:">{{region.name_rgn}}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content tabcontent-border">
+                        {% for region in regions %}
+                        <div class="tab-pane  p-20" id="{{region.name_rgn}}" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="card m-t-0">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="peity_line_neutral left text-center m-t-10"><span><span style="display: none;">10,15,8,14,13,10,10</span>
+                                                    <canvas width="50" height="24"></canvas>
+                                                    </span>
+                                                    <h6>10%</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 border-left text-center p-t-10">
+                                                <h3 class="mb-0 font-weight-bold">150</h3>
+                                                <span class="text-muted">New Stutends</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card m-t-0">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="peity_bar_bad left text-center m-t-10"><span><span style="display: none;">3,5,6,16,8,10,6</span>
+                                                    <canvas width="50" height="24"></canvas>
+                                                    </span>
+                                                    <h6>-40%</h6></div>
+                                            </div>
+                                            <div class="col-md-6 border-left text-center p-t-10">
+                                                <h3 class="mb-0 font-weight-bold">4560</h3>
+                                                <span class="text-muted">Orders</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card m-t-0">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="peity_line_good left text-center m-t-10"><span><span style="display: none;">12,6,9,23,14,10,17</span>
+                                                    <canvas width="50" height="24"></canvas>
+                                                    </span>
+                                                    <h6>+60%</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 border-left text-center p-t-10">
+                                                <h3 class="mb-0 ">5672</h3>
+                                                <span class="text-muted">Active Personals</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card m-t-0">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="peity_bar_good left text-center m-t-10"><span>12,6,9,23,14,10,13</span>
+                                                    <h6>+30%</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 border-left text-center p-t-10">
+                                                <h3 class="mb-0 font-weight-bold">2560</h3>
+                                                <span class="text-muted">Register</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-20">
+
+                                <ul class="nav nav-tabs" role="tablist">
+                                {% for department in departments %}
+                                    {% if department.region.id == region.id %}
+                                    <li class="nav-item">
+                                        <a class="nav-link p-10 btn btn-warning" data-toggle="tab" href="#{{department.id}}" role="tab">
+                                            <span >{{department.name_dep}}</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                {% endfor %}
+                                </ul>
+                                <div class="tab-content tabcontent-border">
+                                    {% for department in departments %}
+                                        {% if department.region.id == region.id %}
+                                    <div class="tab-pane p-20" id="{{department.id}}" role="tabpanel">
+                                        <div class="p-20">
+                                            <div class="card" style="margin-top: -40px">
+                                                <div class="card-body">
+                                                    <h5 class="card-title m-b-0">Statistiques des arrondissements</h5>
+                                                </div>
+                                                <table class="table">
+                                                      <thead>
+                                                        <tr>
+                                                          <th scope="col">Code arr.</th>
+                                                          <th scope="col">Arrond.</th>
+                                                          <th scope="col">dernières Stat.</th>
+                                                          <th scope="col">Actuelles Stat.</th>
+                                                          <th scope="col">% progression</th>
+                                                        </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                        {% for arrondissement in arrondissements %}
+                                                        {% if arrondissement.department.id == department.id %}
+                                                        <tr>
+                                                          <th scope="row">{{arrondissement.code_arr}}</th>
+                                                          <td>{{arrondissement.name_arr}}</td>
+                                                            <td>
+                                                                <label style="color:violet">Filles : -- %</label> <br>
+                                                                <label style="color:blue"> Garçons : -- %</label>
+                                                            </td>
+                                                            <td>
+                                                                <label style="color:violet">Filles : -- %</label> <br>
+                                                                <label style="color:blue"> Garçons : -- %</label>
+                                                            </td>
+
+                                                          <td> <label style="color:green">OUI</label><br><label style="color:red">NON</label></td>
+                                                        </tr>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                      </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                </div>
+                                <span class="hidden-xs-down">{{region.name_rgn}}</span>
+                           </div>
+                        </div>
+                        {% endfor %}
+                        <div class="tab-pane p-20" id="messages" role="tabpanel">
+                            <div class="p-20">
+                                <p>And is full of waffle to It has multiple paragraphs and is full of waffle to pad out the comment. Usually, you just wish these sorts of comments would come to an end.multiple paragraphs and is full of waffle to pad out the comment..</p>
+                                <img src="{% static 'images/background/img4.jpg'%}" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+
+
+            {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+
+</body>
+
+</html>

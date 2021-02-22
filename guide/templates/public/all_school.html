@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../public/_head.html' %}
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader"></div>
+
+	<!-- Top Header_Area -->
+    {% include '../public/top_header_area.html' %}
+	<!-- End Top Header_Area -->
+
+	<!-- Header_Area -->
+    {% include '../public/main_navbar.html' %}
+	<!-- End Header_Area -->
+
+    <!-- Our Services Area -->
+    <section class="our_services_area">
+        <div class="container">
+            <div class="tittle wow fadeInUp">
+                <h2>établissements reconnus par le ministère</h2>
+                <h4>Lorem Ipsum is simply dummy text of the printing and typesetting industry</h4>
+            </div>
+            <div class="portfolio_inner_area">
+                <div class="portfolio_filter">
+                    <ul>
+                        <li data-filter="*" class="active"><a href=""> TOUT</a></li>
+                        <li data-filter=".Francophone"><a href="">Francophone</a></li>
+                        <li data-filter=".Anglophone"><a href="">Anglophone</a></li>
+                        <li data-filter=".BILINGUE"><a href="">Bilingue</a></li>
+                        <li data-filter=".PRIVEE"><a href="">Privée</a></li>
+                        <li data-filter=".PUBLIC"><a href="">Publique</a></li>
+                        <li data-filter=".CATHOLIQUE"><a href="">Catolique</a></li>
+                        <li data-filter=".ISLAMIQUE"><a href="">Islamique</a></li>
+                        <li data-filter=".PROTESTANT"><a href="">Protestant</a></li>
+                        <li data-filter=".LAÎC"><a href="">Laic</a></li>
+                    </ul>
+                </div>
+                <div class="portfolio_item">
+                   <div class="grid-sizer"></div>
+                    {% for school in schools %}
+                    <div class="single_facilities col-xs-4 p0 {{school.system_sch}} {{school.order.name_ord}} {{school.arrondissement.name_arr}}">
+                       <div class="single_facilities_inner">
+                          	<img style="width: 370px; height: 300px" src="{% static ''%}{{school.img_sch}}" alt="">
+                           <div class="row">
+                               <h4 style="margin-top:2%; width: 80%; color:yellow; text-align: center; background-color: green; border-radius:8%; margin-left: 8%">{{school.name_sch}}</h4>
+                               <a style="border-radius:0%; margin-left: 4%; margin-bottom: 8%; margin-top:4%" class="col-md-3 btn btn-primary" href="{% url 'publicMapSchool' school.id%}">Mapper</a>
+                               <a style="border-radius:0%; margin-left: 6%; margin-bottom: 8%; margin-top:4%" class="col-md-3  btn btn-warning" href="{% url 'publicDetails' school.id%}">Infrastrutures</a>
+                               <div class="col-md-4 dropup" style="border-radius:0%; margin-left: 2%; margin-bottom: 8%; margin-top:4%">
+                                  <button style="border-radius:0%" class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Description
+                                    <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="width: 449%">
+                                    <li><a style="background-color: green; color: yellow; size:12px" href="#">{{school.name_sch}}</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><h4 style="margin:4%">{{school.desc_sch}}</h4></li>
+                                  </ul>
+                                </div>
+                           </div>
+                            <div class="gallery_hover" style="height: 50%">
+                                <h4 style="margin-top:-30%">{{school.name_sch}}</h4>
+                                <ul>
+                                    <li><a href="{% url 'publicDetails' school.id%}"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                    <li><a href="{% url 'publicMapSchool' school.id%}"><i class="fa fa-map" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Our Services Area -->
+
+    <!-- Footer Area -->
+{% include '../public/_footer.html' %}
+    <!-- End Footer Area -->
+
+    {% include '../public/javascript.html' %}
+
+</body>
+</html>

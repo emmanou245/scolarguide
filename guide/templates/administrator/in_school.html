@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+{% load static %}
+
+{% include '../administrator/_head.html' %}
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+
+        {% include '../administrator/_left_sidebar.html' %}
+
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+
+            {% include '../administrator/_page_breadcrumb.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+
+            <div class="container-fluid">
+                <!-- Cards -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card m-t-0">
+                    <div class="row">
+                        <div class="col-md-6"><h4 style="margin: 4%">Classes</h4>
+                            <div class="text-center m-t-10"><span>
+                                <canvas width="50" height="24"></canvas>
+                                </span>
+                                <h6 class="fa fa-home">Total : {{classes.count}} </h6>
+                            </div>
+                        </div>
+                        <div class="col-md-6 border-left text-center p-t-10">
+                            <h3 class="mb-0 font-weight-bold">150</h3>
+                            <span class="text-muted">New Users</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card m-t-0">
+                    <div class="row">
+                        <div class="col-md-6"><h4 style="margin: 4%">Personnels</h4>
+                            <div class="text-center m-t-10"><span>
+                                <canvas width="50" height="24"></canvas>
+                                </span>
+                                <h6 class="fa fa-home">Total : {{apparts.count}} </h6>
+                            </div>
+                        </div>
+                        <div class="col-md-6 border-left text-center p-t-10">
+                            <h3 class="mb-0 font-weight-bold">4560</h3>
+                            <span class="text-muted">Orders</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card m-t-0">
+                    <div class="row">
+                        <div class="col-md-6"><h4 style="margin: 4%">Infrastructure</h4>
+                            <div class="text-center m-t-10"><span>
+                                <canvas width="50" height="24"></canvas>
+                                </span>
+                                <h6 class="fa fa-home">Total : {{infrastructures.count}} </h6>
+                            </div>
+                        </div>
+                        <div class="col-md-6 border-left text-center p-t-10">
+                            <h3 class="mb-0 ">5672</h3>
+                            <span class="text-muted">Active Users</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End cards -->
+            <h3>Cycles & Salles de classe</h3>
+            <div class="row">
+                {% for offer in offers %}
+                <div class="card">
+                    <div class="card-body">
+                        <label style="color: red">Année scolaire: {{offer.edition_year}}</label> <br>
+                        <h5 class="card-title">CYCLE : {{ offer.cycle.name_ccl }}</h5>
+                        <div class="row">
+                            <div class="col-md-2 col-lg-2 col-xlg-2">
+                                <img style="width:76%; height: 100%" src="{% static ''%}{{offer.cycle.img_ccl}}" alt="img_ccl">
+                            </div>
+                            <div class="col-md-4 col-lg-4 col-xlg-3">
+                                <form method="post" action="">{% csrf_token %}
+                                    <h6>Description: </h6>
+                                    <textarea class="form-control" name="desc_ccl" style="height: 134px"
+                                           placeholder="{{ offer.cycle.name_ccl }}">
+                                        {{ offer.cycle.desc_ccl }}
+                                    </textarea>
+                                    <input style="float: right; margin:1.7%" type="submit" class="btn btn-primary" value="Modifier la description" name="Modifier">
+                                </form>
+                            </div>
+                        {% for classe in classes %}
+                            {% if classe.cycle.id == offer.cycle.id %}
+                            <!-- Column -->
+                            <div class="col-md-3 col-lg-3 col-xlg-3" style="">
+                                <div class="card card-hover">
+                                    <a href="{% url 'inClass' classe.id %}" class="btn btn-success">
+                                        <div class="box bg-danger text-center" style="">
+                                            <h5 style="color: white;">
+                                                {{classe.abbrv_inf}} : {{classe.letter}} | Etat : {{classe.state_inf}}
+                                            </h5>
+                                            <img style="width: 100%; border-radius: 4px; height: 125px"
+                                                 src="{% static ''%}{{classe.img_inf}}"
+                                                 alt="Classe" class="light-logo" />
+                                    </a>
+                                        </div>
+                                <label style="color:green">Status juridique : {{classe.status_inf}}</label>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <!-- Column -->
+                        {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div><hr>
+            <h3>Personnels de l'établissement </h3>
+            <div class="row">
+                {% for appart in apparts %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <label style="color: red">Année d'affectation : {{appart.year_affect}}</label> <br>
+                            <label style="color: red">Prise de service : {{appart.year_start_srv}}</label> <br>
+                            <h5 class="card-title" style="color: green">Fonction occupé : {{ appart.fonction_psl }}</h5>
+                            <div class="row">
+
+                                <!-- Column -->
+                                <div style="">
+                                    <div class="card card-hover">
+                                        <a href="" class="btn btn-success">
+                                            <div class="box bg-danger text-center" style="">
+                                                <h5 style="color: white;">
+                                                    {{appart.personal.name_psl}} {{appart.personal.sec_name_psl}}
+                                                </h5>
+                                                <img style="width: 100%; border-radius: 4px; height: 125px"
+                                                     src="{% static ''%}{{appart.personal.img_psl}}"
+                                                     alt="personel" class="light-logo" />
+                                                <h5 style="color: yellow;margin-top:2%">
+                                                    Matricule : {{appart.personal.mat_number_psl}}
+                                                </h5>
+                                                <h5 style="color: white;margin-top:2%">
+                                                    Dip. Acad. : {{appart.personal.pl_h_dip_aca}}
+                                                </h5>
+                                                <h5 style="color: white;margin-top:2%">
+                                                    Dip. Pro. : {{appart.personal.pl_h_dip_pro}}
+                                                </h5>
+                                                <h5 style="color: white;margin-top:2%">
+                                                    Années d'exp. : {{appart.personal.anciennete_svr}} ans
+                                                </h5>
+                                        </a>
+                                            </div>
+                                    </div>
+                                    <h6>Date d'affection système : {{appart.last_modify_apt}} </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div><hr>
+            <h3>Infrastructures de l'établissement </h3>
+            <div class="row">
+                {% for infrastructure in infrastructures %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <label style="color: red">Titre | nom : {{infrastructure.name_inf}}</label> <br>
+                            <label style="color: red">Etat actuel : {{infrastructure.state_inf}}</label> <br>
+                            <h5 class="card-title" style="color: green">Status juridique : {{ infrastructure.status_inf }}</h5>
+                            <div class="row">
+                                <!-- Column -->
+                                <div class="card card-hover">
+                                    <a href="" class="btn btn-success" style="width:100%">
+                                        <div class="box bg-danger text-center">
+                                            <h5 style="color: white;">
+                                                Lettre : {{infrastructure.letter}}
+                                            </h5>
+                                            <img style="width: 100%; border-radius: 4px; height: 125px"
+                                                 src="{% static ''%}{{infrastructure.img_inf}}"
+                                                 alt="Img_inf" class="light-logo" />
+                                            <h5 style="color: yellow;margin-top:2%">
+                                                Cycle : {{infrastructure.cycle}}
+                                            </h5>
+                                            <h5>Description :</h5>
+                                            <p style="color: white;margin-top:2%">
+                                                {{infrastructure.desc_inf}}
+                                            </p>
+                                    </a>
+                                        </div>
+                                </div>
+                                <h6>Dernière modif. : {{infrastructure.last_modify_inf}} </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% include '../administrator/_footer.html' %}
+
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+
+    {% include '../administrator/_javascript.html' %}
+
+</body>
+
+</html>
